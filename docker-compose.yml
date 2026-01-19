@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php.Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+    container_name: goworkout-php
+    volumes:
+      - .:/var/www
+    networks:
+      - goworkout-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: goworkout-nginx
+    ports:
+      - "8086:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - goworkout-network
+
+  db:
+    image: mysql:8.0
+    container_name: goworkout-app-db
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - '3307:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - goworkout-network
+
+  node:
+    image: node:20-alpine
+    container_name: goworkout-node
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "5173:5173"
+    tty: true
+    networks:
+      - goworkout-network
+
+networks:
+  goworkout-network:
+    driver: bridge
