@@ -1,0 +1,9 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "mysql",
+        "storage",
+        "vendor",
+        "node_modules"
+    ]
+}
