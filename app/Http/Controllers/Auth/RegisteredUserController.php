@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -40,6 +41,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
+            'id' => Str::uuid(),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
