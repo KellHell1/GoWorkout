@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\{Exercise, Muscle};
+use App\Models\Exercise;
+use App\Models\Muscle;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 

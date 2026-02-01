@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\{Exercise, User, Workout};
+use App\Models\Exercise;
+use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Database\Seeder;
 
 class WorkoutSeeder extends Seeder
@@ -15,7 +17,7 @@ class WorkoutSeeder extends Seeder
     public function run(): void
     {
         $user = User::first();
-        if (! $user) {
+        if (!$user) {
             return;
         }
 

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\{Muscle, MuscleGroup};
+use App\Models\Muscle;
+use App\Models\MuscleGroup;
 use Illuminate\Database\Seeder;
 
 class MusclesSeeder extends Seeder
