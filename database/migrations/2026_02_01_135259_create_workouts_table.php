@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,10 +14,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('muscles', function (Blueprint $table) {
+        Schema::create('workouts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('muscle_group_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->string('name')->default(Carbon::now()->toDateTimeString().' Workout');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('muscles');
+        Schema::dropIfExists('workouts');
     }
 };
