@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('muscles', function (Blueprint $table) {
+        Schema::create('workout_sets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('muscle_group_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->foreignUuid('workout_exercise_id')->constrained()->onDelete('cascade');
+            $table->integer('reps')->nullable();
+            $table->decimal('weight')->nullable();
+            $table->boolean('is_completed')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('muscles');
+        Schema::dropIfExists('workout_sets');
     }
 };
