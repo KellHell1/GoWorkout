@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exercise_muscles', function (Blueprint $table) {
+        Schema::create('exercise_muscle', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('exercise_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('muscle_id')->constrained()->onDelete('cascade');

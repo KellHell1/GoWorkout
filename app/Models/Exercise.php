@@ -17,6 +17,6 @@ class Exercise extends Model
     public function muscles(): BelongsToMany
     {
         return $this->belongsToMany(Muscle::class)
-            ->withPivot('is_primary');
+            ->withPivot('id', 'is_primary');
     }
 }
